@@ -1,8 +1,23 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId}/{document=**} {
+    
+    // Allow users to read/write their own history
+    match /users/{userId}/history/{document=**} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
+    
+    // Allow users to read/write their own presets
+    match /users/{userId}/presets/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Keep your existing generations rule (if still needed)
+    match /generations/{generationId} {
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow read, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
   }
 }
