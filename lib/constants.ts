@@ -13,15 +13,9 @@ export const LANGUAGES = [
 ] as const;
 
 export const SPEAKERS = [
-  { id: "anushka", label: "Anushka", gender: "Female" },
-  { id: "abhilash", label: "Abhilash", gender: "Male" },
-  { id: "manisha", label: "Manisha", gender: "Female" },
-  { id: "vidya", label: "Vidya", gender: "Female" },
-  { id: "arya", label: "Arya", gender: "Female" },
-  { id: "karun", label: "Karun", gender: "Male" },
-  { id: "hitesh", label: "Hitesh", gender: "Male" },
   { id: "aditya", label: "Aditya", gender: "Male" },
   { id: "ritu", label: "Ritu", gender: "Female" },
+  { id: "ashutosh", label: "Ashutosh", gender: "Male" },
   { id: "priya", label: "Priya", gender: "Female" },
   { id: "neha", label: "Neha", gender: "Female" },
   { id: "rahul", label: "Rahul", gender: "Male" },
@@ -41,7 +35,6 @@ export const SPEAKERS = [
   { id: "kabir", label: "Kabir", gender: "Male" },
   { id: "aayan", label: "Aayan", gender: "Male" },
   { id: "shubh", label: "Shubh", gender: "Male" },
-  { id: "ashutosh", label: "Ashutosh", gender: "Male" },
   { id: "advait", label: "Advait", gender: "Male" },
   { id: "anand", label: "Anand", gender: "Male" },
   { id: "tanya", label: "Tanya", gender: "Female" },
@@ -57,6 +50,7 @@ export const SPEAKERS = [
   { id: "rehan", label: "Rehan", gender: "Male" },
   { id: "soham", label: "Soham", gender: "Male" },
   { id: "rupali", label: "Rupali", gender: "Female" },
+  { id: "niharika", label: "Niharika", gender: "Female" },
 ] as const;
 
 export const SAMPLE_RATES = [8000, 16000, 22050, 24000] as const;
@@ -72,7 +66,7 @@ export type GenerationSettings = {
 
 export const DEFAULT_SETTINGS: GenerationSettings = {
   languageCode: "hi-IN",
-  speaker: "anushka",
+  speaker: "aditya",
   pace: 1.0,
   sampleRate: 22050,
 };
