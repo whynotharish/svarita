@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Wand2, Loader2, Save } from "lucide-react";
 import DecimalSlider from "./DecimalSlider";
 import WaveformPlayer from "./WaveformPlayer";
-import PresetManager from "./PresetManager";
 import { LANGUAGES, SPEAKERS, SAMPLE_RATES, MAX_CHARS, DEFAULT_SETTINGS, GenerationSettings } from "@/lib/constants";
 import { base64ToBlobUrl, base64ToBlob, slugify } from "@/lib/audio";
 import { useAuth } from "@/context/AuthContext";
@@ -61,9 +60,17 @@ export default function Studio() {
     setSavingHistory(true);
     try {
       const blob = base64ToBlob(audioBase64);
-      await saveHistoryEntry(user.uid, { text, settings, blob });
+      
+      // Calculate duration from audio blob
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const arrayBuffer = await blob.arrayBuffer();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+      const durationSec = audioBuffer.duration;
+      
+      await saveHistoryEntry(user.uid, { text, settings, blob, durationSec });
       setSaved(true);
     } catch (e) {
+      console.error("History save error:", e);
       setError("Could not save to history.");
     } finally {
       setSavingHistory(false);
@@ -93,7 +100,7 @@ export default function Studio() {
             <button
               onClick={handleGenerate}
               disabled={!text.trim() || overLimit || loading}
-              className="flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? <Loader2 size={15} className="animate-spin" /> : <Wand2 size={15} />}
               {loading ? "Generating…" : "Generate audio"}
@@ -202,11 +209,6 @@ export default function Studio() {
               </select>
             </div>
           </div>
-        </div>
-
-        <div className="rounded-2xl border border-border bg-surface p-5">
-          <h3 className="mb-3 font-display text-sm font-semibold text-ink">Presets</h3>
-          <PresetManager settings={settings} onApply={setSettings} />
         </div>
       </div>
     </div>
