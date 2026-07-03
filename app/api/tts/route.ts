@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { SPEAKERS } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
 const SARVAM_URL = "https://api.sarvam.ai/text-to-speech";
 const MAX_CHARS = 2000;
-const VALID_SPEAKERS = new Set(SPEAKERS.map((speaker) => speaker.id));
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,9 +19,10 @@ export async function POST(req: NextRequest) {
     const {
       text,
       languageCode = "hi-IN",
-      speaker = "anushka",
+      speaker = "shubh",
       pace = 1.0,
-      sampleRate = 22050,
+      temperature = 0.6,
+      sampleRate = 24000,
     } = body || {};
 
     if (!text || typeof text !== "string" || !text.trim()) {
@@ -35,18 +34,16 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    if (!VALID_SPEAKERS.has(speaker)) {
-      return NextResponse.json(
-        { error: `Speaker '${speaker}' is not supported. Choose one of: ${[...VALID_SPEAKERS].join(", ")}.` },
-        { status: 400 }
-      );
-    }
 
+    // bulbul:v3 does not support pitch or loudness — only pace, temperature,
+    // and sample rate are meaningful here. Sending pitch/loudness is silently
+    // ignored by Sarvam, so we just don't send them.
     const payload = {
       inputs: [text],
       target_language_code: languageCode,
       speaker,
-      pace: clamp(Number(pace) || 1, 0.3, 2.0),
+      pace: clamp(Number(pace) || 1, 0.5, 2.0),
+      temperature: clamp(Number(temperature) || 0.6, 0.01, 1.0),
       speech_sample_rate: sampleRate,
       enable_preprocessing: true,
       model: "bulbul:v3",
