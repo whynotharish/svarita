@@ -36,16 +36,16 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-live animate-pulseGlow" />
-            Powered by Sarvam Bulbul
+            Powered by Sarvam AI
           </span>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink md:text-6xl">
-            Voiceovers for every
+            Create polished voiceovers
             <br />
-            <span className="text-accent">Udaan</span> language, in seconds.
+            in Indian languages.
           </h1>
           <p className="mx-auto mt-5 max-w-lg text-base text-muted md:text-lg">
-            Type it once. Hear it in eleven Indian languages, tune the pace and pitch
-            to the beat, and ship broadcast-ready audio for campaigns, PNs, and store ops.
+            Type your script, choose a voice and language, then fine-tune pace, pitch,
+            and loudness before downloading broadcast-ready audio.
           </p>
         </motion.div>
 

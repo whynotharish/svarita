@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
-  title: "Svarita — Udaan Voice Studio",
-  description: "Generate natural-sounding voiceovers in Indian languages for Udaan campaigns.",
+  title: "Svarita — AI Voice Studio",
+  description: "Generate natural-sounding voiceovers in Indian languages for campaigns and content.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

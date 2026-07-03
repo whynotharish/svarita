@@ -23,7 +23,7 @@ export default function Navbar() {
             <AudioLines size={17} />
           </div>
           <span className="font-display text-[15px] font-semibold tracking-tight text-ink">
-            Svarita <span className="ml-1 text-xs font-normal text-muted">· Udaan Voice Studio</span>
+            Svarita <span className="ml-1 text-xs font-normal text-muted">· AI Voice Studio</span>
           </span>
         </div>
 
