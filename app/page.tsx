@@ -6,9 +6,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Studio from "@/components/Studio";
 import BatchPanel from "@/components/BatchPanel";
-import VoiceCloningPanel from "@/components/VoiceCloningPanel";
 import HistoryPanel from "@/components/HistoryPanel";
-import { Mic2, Layers, Sparkles } from "lucide-react";
+import { Mic2, Layers } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +15,6 @@ export const dynamic = "force-dynamic";
 const TABS = [
   { id: "single", label: "Single script", icon: Mic2 },
   { id: "batch", label: "Batch", icon: Layers },
-  { id: "cloning", label: "Voice cloning", icon: Sparkles },
 ] as const;
 
 export default function Home() {
@@ -58,7 +56,6 @@ export default function Home() {
         <div id="batch">
           {tab === "single" && <Studio />}
           {tab === "batch" && <BatchPanel />}
-          {tab === "cloning" && <VoiceCloningPanel />}
         </div>
       </section>
 
