@@ -41,6 +41,8 @@ export default function Studio() {
           languageCode: settings.languageCode,
           speaker: settings.speaker,
           pace: settings.pace,
+          pitch: settings.pitch,
+          loudness: settings.loudness,
           sampleRate: settings.sampleRate,
         }),
       });
@@ -60,18 +62,11 @@ export default function Studio() {
     setSavingHistory(true);
     try {
       const blob = base64ToBlob(audioBase64);
-      
-      // Calculate duration from audio blob
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const arrayBuffer = await blob.arrayBuffer();
-      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-      const durationSec = audioBuffer.duration;
-      
-      await saveHistoryEntry(user.uid, { text, settings, blob, durationSec });
+      await saveHistoryEntry(user.uid, { text, settings, blob });
       setSaved(true);
-    } catch (e) {
-      console.error("History save error:", e);
-      setError("Could not save to history.");
+    } catch (e: any) {
+      console.error("Save to history failed:", e);
+      setError(`Could not save to history: ${e?.code || e?.message || "unknown error"}`);
     } finally {
       setSavingHistory(false);
     }
@@ -91,7 +86,7 @@ export default function Studio() {
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Namaste! Wondermart mein aapka swagat hai. Type your voiceover script here…"
+            placeholder="ನಮಸ್ಕಾರ! ಸ್ವರಿತಾಗೆ ಸ್ವಾಗತ. ನಿಮ್ಮ ಆಲೋಚನೆಗಳಿಗೆ ಈಗ ಧ್ವನಿ ನೀಡಿ. ಕನ್ನಡ, ಹಿಂದಿ, ತೆಲುಗು, ತಮಿಳು ಸೇರಿದಂತೆ ಅನೇಕ ಭಾರತೀಯ ಭಾಷೆಗಳಲ್ಲಿ ಸಹಜ ಮತ್ತು ಸ್ಪಷ್ಟವಾದ ಧ್ವನಿಯನ್ನು ಕ್ಷಣಾರ್ಧದಲ್ಲಿ ರಚಿಸಿ"
             rows={9}
             className="w-full resize-none bg-transparent text-[15px] leading-relaxed text-ink outline-none placeholder:text-muted/60"
           />
@@ -100,7 +95,7 @@ export default function Studio() {
             <button
               onClick={handleGenerate}
               disabled={!text.trim() || overLimit || loading}
-              className="flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
             >
               {loading ? <Loader2 size={15} className="animate-spin" /> : <Wand2 size={15} />}
               {loading ? "Generating…" : "Generate audio"}
@@ -192,6 +187,23 @@ export default function Studio() {
               step={0.01}
               onChange={(v) => update({ pace: v })}
             />
+            <DecimalSlider
+              label="Pitch"
+              value={settings.pitch}
+              min={-0.75}
+              max={0.75}
+              step={0.01}
+              onChange={(v) => update({ pitch: v })}
+            />
+            <DecimalSlider
+              label="Loudness"
+              value={settings.loudness}
+              min={0.5}
+              max={2.0}
+              step={0.01}
+              onChange={(v) => update({ loudness: v })}
+            />
+
             <div>
               <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-muted">
                 Quality (sample rate)
