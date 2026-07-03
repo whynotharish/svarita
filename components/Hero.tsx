@@ -36,14 +36,16 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-live animate-pulseGlow" />
-            Powered by Sarvam AI
+            Powered by Sarvam Bulbul
           </span>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink md:text-6xl">
-            Bring Your Words to Life in Every Indian Language
+            Voiceovers for every
+            <br />
+            <span className="text-accent">Udaan</span> language, in seconds.
           </h1>
           <p className="mx-auto mt-5 max-w-lg text-base text-muted md:text-lg">
-            Generate lifelike AI voiceovers with natural pronunciation and emotion.
-            Choose the voice and pace that best match your brand.
+            Type it once. Hear it in eleven Indian languages, tune the pace and tone
+            to the beat, and ship broadcast-ready audio for campaigns, PNs, and store ops.
           </p>
         </motion.div>
 
