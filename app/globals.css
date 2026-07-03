@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #08080b;
+  --surface: #131318;
+  --surface-elevated: #1b1b22;
+  --border: #26262f;
+  --ink: #f4f3f7;
+  --muted: #8c8b9b;
+}
+
+html.light {
+  color-scheme: light;
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --surface-elevated: #f0eee9;
+  --border: #e3e0d8;
+  --ink: #15141a;
+  --muted: #6b6a72;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #33333f transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+::selection {
+  background: #7c5cff55;
+}
+
+.bg-grain {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.045) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+html.light .bg-grain {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0);
+}
+
+.glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #7c5cff var(--fill, 50%), #2a2a34 var(--fill, 50%));
+  outline: none;
+}
+html.light input[type="range"] {
+  background: linear-gradient(to right, #7c5cff var(--fill, 50%), #ddd8cc var(--fill, 50%));
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f4f3f7;
+  border: 3px solid #7c5cff;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f4f3f7;
+  border: 3px solid #7c5cff;
+  cursor: pointer;
+}
