@@ -34,7 +34,6 @@ export async function saveHistoryEntry(
     languageCode: data.settings.languageCode,
     speaker: data.settings.speaker,
     pace: data.settings.pace,
-    pitch: data.settings.pitch,
     audioUrl,
     storagePath: path,
     durationSec: data.durationSec ?? null,

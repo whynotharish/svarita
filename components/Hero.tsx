@@ -43,7 +43,7 @@ export default function Hero() {
           </h1>
           <p className="mx-auto mt-5 max-w-lg text-base text-muted md:text-lg">
             Generate lifelike AI voiceovers with natural pronunciation and emotion.
-            Fine-tune the voice, pace, and audio levels to match your brand.
+            Choose the voice and pace that best match your brand.
           </p>
         </motion.div>
 

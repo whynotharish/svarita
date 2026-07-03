@@ -67,8 +67,6 @@ export type GenerationSettings = {
   languageCode: string;
   speaker: string;
   pace: number;
-  pitch: number;
-  loudness: number;
   sampleRate: number;
 };
 
@@ -76,8 +74,6 @@ export const DEFAULT_SETTINGS: GenerationSettings = {
   languageCode: "hi-IN",
   speaker: "anushka",
   pace: 1.0,
-  pitch: 0,
-  loudness: 1.0,
   sampleRate: 22050,
 };
 
@@ -87,7 +83,6 @@ export type HistoryEntry = {
   languageCode: string;
   speaker: string;
   pace: number;
-  pitch: number;
   audioUrl: string;
   durationSec?: number;
   createdAt: number;

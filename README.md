@@ -76,12 +76,9 @@ Open `http://localhost:3000`.
 
 ## What's included
 
-- **Studio** — single script → speech, with language, voice, decimal-precision
-  speed/pitch/loudness sliders, sample rate, live waveform playback, download.
+- **Studio** — single script → speech, with language, voice, speed control,
+  sample rate, live waveform playback, and download.
 - **Batch** — multiple scripts generated in one pass, downloadable as a zip.
-- **Voice cloning** — Sarvam's cloning is enterprise/consent-based, not a
-  self-serve API call, so this panel is honest about that and gives you the
-  request path instead of faking a broken feature.
 - **Presets** — save named voice-setting combos per account.
 - **History** — every saved generation, stored in Firebase Storage with
   metadata in Firestore, scoped to your account by security rules.
