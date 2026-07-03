@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SPEAKERS } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
 const SARVAM_URL = "https://api.sarvam.ai/text-to-speech";
 const MAX_CHARS = 2000;
+const VALID_SPEAKERS = new Set(SPEAKERS.map((speaker) => speaker.id));
 const MAX_ITEMS = 20;
 
 export async function POST(req: NextRequest) {
@@ -24,6 +26,12 @@ export async function POST(req: NextRequest) {
     }
     if (items.length > MAX_ITEMS) {
       return NextResponse.json({ error: `Batch limited to ${MAX_ITEMS} items at a time.` }, { status: 400 });
+    }
+    if (!VALID_SPEAKERS.has(speaker)) {
+      return NextResponse.json(
+        { error: `Speaker '${speaker}' is not supported. Choose one of: ${[...VALID_SPEAKERS].join(", ")}.` },
+        { status: 400 }
+      );
     }
 
     const results: { index: number; text: string; audioBase64?: string; error?: string }[] = [];

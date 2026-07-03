@@ -6,9 +6,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Studio from "@/components/Studio";
 import BatchPanel from "@/components/BatchPanel";
-import VoiceCloningPanel from "@/components/VoiceCloningPanel";
 import HistoryPanel from "@/components/HistoryPanel";
-import { Mic2, Layers, Sparkles } from "lucide-react";
+import { Mic2, Layers } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +15,6 @@ export const dynamic = "force-dynamic";
 const TABS = [
   { id: "single", label: "Single script", icon: Mic2 },
   { id: "batch", label: "Batch", icon: Layers },
-  { id: "cloning", label: "Voice cloning", icon: Sparkles },
 ] as const;
 
 export default function Home() {
@@ -58,7 +56,6 @@ export default function Home() {
         <div id="batch">
           {tab === "single" && <Studio />}
           {tab === "batch" && <BatchPanel />}
-          {tab === "cloning" && <VoiceCloningPanel />}
         </div>
       </section>
 
@@ -66,7 +63,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
           <div className="mb-8">
             <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">Your history</h2>
-            <p className="mt-2 text-sm text-muted">Every clip you've saved, tied to your Udaan account.</p>
+            <p className="mt-2 text-sm text-muted">Every clip you've saved to your account.</p>
           </div>
           <HistoryPanel />
         </div>
@@ -74,8 +71,8 @@ export default function Home() {
 
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-xs text-muted md:flex-row">
-          <span>Svarita — Udaan's internal voice studio for grocery &amp; organic campaigns.</span>
-          <span>Speech by Sarvam AI · Built by Claude</span>
+          <span>Svarita — fast AI voiceovers for campaigns, product updates, and content.</span>
+          <span>Powered by Sarvam AI</span>
         </div>
       </footer>
     </main>
