@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
             loudness: clamp(Number(loudness) || 1, 0.5, 2.0),
             speech_sample_rate: sampleRate,
             enable_preprocessing: true,
-            model: "bulbul:v2",
+            model: "bulbul:v3",
           }),
         });
         if (!res.ok) {
