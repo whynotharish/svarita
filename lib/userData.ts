@@ -16,9 +16,6 @@ import { GenerationSettings } from "@/lib/constants";
 export function historyCollection(uid: string) {
   return collection(getFirebaseDb(), "users", uid, "history");
 }
-export function presetsCollection(uid: string) {
-  return collection(getFirebaseDb(), "users", uid, "presets");
-}
 
 export async function saveHistoryEntry(
   uid: string,
@@ -34,6 +31,7 @@ export async function saveHistoryEntry(
     languageCode: data.settings.languageCode,
     speaker: data.settings.speaker,
     pace: data.settings.pace,
+    temperature: data.settings.temperature,
     audioUrl,
     storagePath: path,
     durationSec: data.durationSec ?? null,
@@ -61,23 +59,4 @@ export async function deleteHistoryEntry(uid: string, id: string, storagePath?: 
       // ignore if already gone
     }
   }
-}
-
-export function listenToPresets(uid: string, cb: (presets: any[]) => void) {
-  const q = query(presetsCollection(uid), orderBy("createdAt", "desc"));
-  return onSnapshot(q, (snap) => {
-    cb(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-  });
-}
-
-export async function savePreset(uid: string, name: string, settings: GenerationSettings) {
-  await addDoc(presetsCollection(uid), {
-    name,
-    settings,
-    createdAt: serverTimestamp(),
-  });
-}
-
-export async function deletePreset(uid: string, id: string) {
-  await deleteDoc(doc(getFirebaseDb(), "users", uid, "presets", id));
 }
