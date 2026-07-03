@@ -12,41 +12,72 @@ export const LANGUAGES = [
   { code: "od-IN", label: "Odia", native: "ଓଡ଼ିଆ" },
 ] as const;
 
+// Speakers supported by Sarvam's bulbul:v3 model.
+// bulbul:v2's 7 legacy speakers (anushka, abhilash, manisha, vidya, arya,
+// karun, hitesh) are NOT valid on v3 and will be rejected by the API.
 export const SPEAKERS = [
-  { id: "anushka", label: "Anushka", gender: "Female" },
-  { id: "meera", label: "Meera", gender: "Female" },
-  { id: "pavithra", label: "Pavithra", gender: "Female" },
-  { id: "maitreyi", label: "Maitreyi", gender: "Female" },
-  { id: "manisha", label: "Manisha", gender: "Female" },
-  { id: "vidya", label: "Vidya", gender: "Female" },
-  { id: "arya", label: "Arya", gender: "Female" },
-  { id: "arvind", label: "Arvind", gender: "Male" },
-  { id: "amol", label: "Amol", gender: "Male" },
-  { id: "amartya", label: "Amartya", gender: "Male" },
-  { id: "karun", label: "Karun", gender: "Male" },
-  { id: "hitesh", label: "Hitesh", gender: "Male" },
+  { id: "shubh", label: "Shubh", gender: "Male" },
+  { id: "aditya", label: "Aditya", gender: "Male" },
+  { id: "ritu", label: "Ritu", gender: "Female" },
+  { id: "priya", label: "Priya", gender: "Female" },
+  { id: "neha", label: "Neha", gender: "Female" },
+  { id: "rahul", label: "Rahul", gender: "Male" },
+  { id: "pooja", label: "Pooja", gender: "Female" },
+  { id: "rohan", label: "Rohan", gender: "Male" },
+  { id: "simran", label: "Simran", gender: "Female" },
+  { id: "kavya", label: "Kavya", gender: "Female" },
+  { id: "amit", label: "Amit", gender: "Male" },
+  { id: "dev", label: "Dev", gender: "Male" },
+  { id: "ishita", label: "Ishita", gender: "Female" },
+  { id: "shreya", label: "Shreya", gender: "Female" },
+  { id: "ratan", label: "Ratan", gender: "Male" },
+  { id: "varun", label: "Varun", gender: "Male" },
+  { id: "manan", label: "Manan", gender: "Male" },
+  { id: "sumit", label: "Sumit", gender: "Male" },
+  { id: "roopa", label: "Roopa", gender: "Female" },
+  { id: "kabir", label: "Kabir", gender: "Male" },
+  { id: "aayan", label: "Aayan", gender: "Male" },
+  { id: "ashutosh", label: "Ashutosh", gender: "Male" },
+  { id: "advait", label: "Advait", gender: "Male" },
+  { id: "amelia", label: "Amelia", gender: "Female" },
+  { id: "sophia", label: "Sophia", gender: "Female" },
+  { id: "anand", label: "Anand", gender: "Male" },
+  { id: "tanya", label: "Tanya", gender: "Female" },
+  { id: "tarun", label: "Tarun", gender: "Male" },
+  { id: "sunny", label: "Sunny", gender: "Male" },
+  { id: "mani", label: "Mani", gender: "Male" },
+  { id: "gokul", label: "Gokul", gender: "Male" },
+  { id: "vijay", label: "Vijay", gender: "Male" },
+  { id: "shruti", label: "Shruti", gender: "Female" },
+  { id: "suhani", label: "Suhani", gender: "Female" },
+  { id: "mohit", label: "Mohit", gender: "Male" },
+  { id: "kavitha", label: "Kavitha", gender: "Female" },
+  { id: "rehan", label: "Rehan", gender: "Male" },
+  { id: "soham", label: "Soham", gender: "Male" },
+  { id: "rupali", label: "Rupali", gender: "Female" },
 ] as const;
 
 export const SAMPLE_RATES = [8000, 16000, 22050, 24000] as const;
 
 export const MAX_CHARS = 2000;
 
+// bulbul:v3 does not support pitch or loudness — those are v2-only params
+// and are silently ignored by the API on v3. Temperature replaces them as
+// the model's expressiveness control.
 export type GenerationSettings = {
   languageCode: string;
   speaker: string;
   pace: number;
-  pitch: number;
-  loudness: number;
+  temperature: number;
   sampleRate: number;
 };
 
 export const DEFAULT_SETTINGS: GenerationSettings = {
   languageCode: "hi-IN",
-  speaker: "anushka",
+  speaker: "shubh",
   pace: 1.0,
-  pitch: 0,
-  loudness: 1.0,
-  sampleRate: 22050,
+  temperature: 0.6,
+  sampleRate: 24000,
 };
 
 export type HistoryEntry = {
@@ -55,7 +86,6 @@ export type HistoryEntry = {
   languageCode: string;
   speaker: string;
   pace: number;
-  pitch: number;
   audioUrl: string;
   durationSec?: number;
   createdAt: number;
