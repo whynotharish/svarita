@@ -42,8 +42,6 @@ export default function Studio() {
           languageCode: settings.languageCode,
           speaker: settings.speaker,
           pace: settings.pace,
-          pitch: settings.pitch,
-          loudness: settings.loudness,
           sampleRate: settings.sampleRate,
         }),
       });
@@ -187,23 +185,6 @@ export default function Studio() {
               step={0.01}
               onChange={(v) => update({ pace: v })}
             />
-            <DecimalSlider
-              label="Pitch"
-              value={settings.pitch}
-              min={-0.75}
-              max={0.75}
-              step={0.01}
-              onChange={(v) => update({ pitch: v })}
-            />
-            <DecimalSlider
-              label="Loudness"
-              value={settings.loudness}
-              min={0.5}
-              max={2.0}
-              step={0.01}
-              onChange={(v) => update({ loudness: v })}
-            />
-
             <div>
               <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-muted">
                 Quality (sample rate)

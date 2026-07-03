@@ -14,17 +14,49 @@ export const LANGUAGES = [
 
 export const SPEAKERS = [
   { id: "anushka", label: "Anushka", gender: "Female" },
-  { id: "meera", label: "Meera", gender: "Female" },
-  { id: "pavithra", label: "Pavithra", gender: "Female" },
-  { id: "maitreyi", label: "Maitreyi", gender: "Female" },
+  { id: "abhilash", label: "Abhilash", gender: "Male" },
   { id: "manisha", label: "Manisha", gender: "Female" },
   { id: "vidya", label: "Vidya", gender: "Female" },
   { id: "arya", label: "Arya", gender: "Female" },
-  { id: "arvind", label: "Arvind", gender: "Male" },
-  { id: "amol", label: "Amol", gender: "Male" },
-  { id: "amartya", label: "Amartya", gender: "Male" },
   { id: "karun", label: "Karun", gender: "Male" },
   { id: "hitesh", label: "Hitesh", gender: "Male" },
+  { id: "aditya", label: "Aditya", gender: "Male" },
+  { id: "ritu", label: "Ritu", gender: "Female" },
+  { id: "priya", label: "Priya", gender: "Female" },
+  { id: "neha", label: "Neha", gender: "Female" },
+  { id: "rahul", label: "Rahul", gender: "Male" },
+  { id: "pooja", label: "Pooja", gender: "Female" },
+  { id: "rohan", label: "Rohan", gender: "Male" },
+  { id: "simran", label: "Simran", gender: "Female" },
+  { id: "kavya", label: "Kavya", gender: "Female" },
+  { id: "amit", label: "Amit", gender: "Male" },
+  { id: "dev", label: "Dev", gender: "Male" },
+  { id: "ishita", label: "Ishita", gender: "Female" },
+  { id: "shreya", label: "Shreya", gender: "Female" },
+  { id: "ratan", label: "Ratan", gender: "Male" },
+  { id: "varun", label: "Varun", gender: "Male" },
+  { id: "manan", label: "Manan", gender: "Male" },
+  { id: "sumit", label: "Sumit", gender: "Male" },
+  { id: "roopa", label: "Roopa", gender: "Female" },
+  { id: "kabir", label: "Kabir", gender: "Male" },
+  { id: "aayan", label: "Aayan", gender: "Male" },
+  { id: "shubh", label: "Shubh", gender: "Male" },
+  { id: "ashutosh", label: "Ashutosh", gender: "Male" },
+  { id: "advait", label: "Advait", gender: "Male" },
+  { id: "anand", label: "Anand", gender: "Male" },
+  { id: "tanya", label: "Tanya", gender: "Female" },
+  { id: "tarun", label: "Tarun", gender: "Male" },
+  { id: "sunny", label: "Sunny", gender: "Male" },
+  { id: "mani", label: "Mani", gender: "Male" },
+  { id: "gokul", label: "Gokul", gender: "Male" },
+  { id: "vijay", label: "Vijay", gender: "Male" },
+  { id: "shruti", label: "Shruti", gender: "Female" },
+  { id: "suhani", label: "Suhani", gender: "Female" },
+  { id: "mohit", label: "Mohit", gender: "Male" },
+  { id: "kavitha", label: "Kavitha", gender: "Female" },
+  { id: "rehan", label: "Rehan", gender: "Male" },
+  { id: "soham", label: "Soham", gender: "Male" },
+  { id: "rupali", label: "Rupali", gender: "Female" },
 ] as const;
 
 export const SAMPLE_RATES = [8000, 16000, 22050, 24000] as const;
@@ -35,8 +67,6 @@ export type GenerationSettings = {
   languageCode: string;
   speaker: string;
   pace: number;
-  pitch: number;
-  loudness: number;
   sampleRate: number;
 };
 
@@ -44,8 +74,6 @@ export const DEFAULT_SETTINGS: GenerationSettings = {
   languageCode: "hi-IN",
   speaker: "anushka",
   pace: 1.0,
-  pitch: 0,
-  loudness: 1.0,
   sampleRate: 22050,
 };
 
@@ -55,7 +83,6 @@ export type HistoryEntry = {
   languageCode: string;
   speaker: string;
   pace: number;
-  pitch: number;
   audioUrl: string;
   durationSec?: number;
   createdAt: number;

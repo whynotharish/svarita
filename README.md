@@ -1,6 +1,6 @@
 # Svarita
 
-A modern voiceover generator for Udaan campaigns — text-to-speech in 11 Indian
+A modern voiceover generator for campaigns and content — text-to-speech in 11 Indian
 languages via Sarvam AI, with batch generation, presets, Google sign-in, and
 per-account history. Built with Next.js, deployed on Vercel, data on Firebase.
 
@@ -76,12 +76,9 @@ Open `http://localhost:3000`.
 
 ## What's included
 
-- **Studio** — single script → speech, with language, voice, decimal-precision
-  speed/pitch/loudness sliders, sample rate, live waveform playback, download.
+- **Studio** — single script → speech, with language, voice, speed control,
+  sample rate, live waveform playback, and download.
 - **Batch** — multiple scripts generated in one pass, downloadable as a zip.
-- **Voice cloning** — Sarvam's cloning is enterprise/consent-based, not a
-  self-serve API call, so this panel is honest about that and gives you the
-  request path instead of faking a broken feature.
 - **Presets** — save named voice-setting combos per account.
 - **History** — every saved generation, stored in Firebase Storage with
   metadata in Firestore, scoped to your account by security rules.

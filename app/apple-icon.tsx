@@ -25,7 +25,6 @@ export default function AppleIcon() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          {/* svarita accent tick — the rising-pitch mark the name refers to */}
           <div
             style={{
               width: 26,

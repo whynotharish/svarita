@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SPEAKERS } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
 const SARVAM_URL = "https://api.sarvam.ai/text-to-speech";
 const MAX_CHARS = 2000;
+const VALID_SPEAKERS = new Set(SPEAKERS.map((speaker) => speaker.id));
 const MAX_ITEMS = 20;
 
 export async function POST(req: NextRequest) {
@@ -17,13 +19,19 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { items, languageCode = "hi-IN", speaker = "anushka", pace = 1.0, pitch = 0, loudness = 1.0, sampleRate = 22050 } = body || {};
+    const { items, languageCode = "hi-IN", speaker = "anushka", pace = 1.0, sampleRate = 22050 } = body || {};
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "Provide a non-empty list of text items." }, { status: 400 });
     }
     if (items.length > MAX_ITEMS) {
       return NextResponse.json({ error: `Batch limited to ${MAX_ITEMS} items at a time.` }, { status: 400 });
+    }
+    if (!VALID_SPEAKERS.has(speaker)) {
+      return NextResponse.json(
+        { error: `Speaker '${speaker}' is not supported. Choose one of: ${[...VALID_SPEAKERS].join(", ")}.` },
+        { status: 400 }
+      );
     }
 
     const results: { index: number; text: string; audioBase64?: string; error?: string }[] = [];
@@ -50,11 +58,9 @@ export async function POST(req: NextRequest) {
             target_language_code: languageCode,
             speaker,
             pace: clamp(Number(pace) || 1, 0.3, 2.0),
-            pitch: clamp(Number(pitch) || 0, -0.75, 0.75),
-            loudness: clamp(Number(loudness) || 1, 0.5, 2.0),
             speech_sample_rate: sampleRate,
             enable_preprocessing: true,
-            model: "bulbul:v2",
+            model: "bulbul:v3",
           }),
         });
         if (!res.ok) {
