@@ -1,6 +1,6 @@
 # Svarita
 
-A modern voiceover generator for Udaan campaigns — text-to-speech in 11 Indian
+A modern voiceover generator for campaigns and content — text-to-speech in 11 Indian
 languages via Sarvam AI, with batch generation, presets, Google sign-in, and
 per-account history. Built with Next.js, deployed on Vercel, data on Firebase.
 

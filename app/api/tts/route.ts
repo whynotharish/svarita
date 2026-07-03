@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SPEAKERS } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
 const SARVAM_URL = "https://api.sarvam.ai/text-to-speech";
 const MAX_CHARS = 2000;
+const VALID_SPEAKERS = new Set(SPEAKERS.map((speaker) => speaker.id));
 
 export async function POST(req: NextRequest) {
   try {
@@ -35,6 +37,12 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+    if (!VALID_SPEAKERS.has(speaker)) {
+      return NextResponse.json(
+        { error: `Speaker '${speaker}' is not supported. Choose one of: ${[...VALID_SPEAKERS].join(", ")}.` },
+        { status: 400 }
+      );
+    }
 
     const payload = {
       inputs: [text],
@@ -45,7 +53,7 @@ export async function POST(req: NextRequest) {
       loudness: clamp(Number(loudness) || 1, 0.5, 2.0),
       speech_sample_rate: sampleRate,
       enable_preprocessing: true,
-      model: "bulbul:v2",
+      model: "bulbul:v3",
     };
 
     const res = await fetch(SARVAM_URL, {
